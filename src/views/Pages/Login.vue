@@ -103,6 +103,7 @@ export default {
         password: this.model.password
       }).then(() => {
         this.$router.push({path: '/dashboard'})
+
       }).catch(error => {
         // eslint-disable-next-line
         console.log(error);

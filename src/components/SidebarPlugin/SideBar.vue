@@ -52,10 +52,10 @@
                             <span>Support</span>
                         </router-link>
                         <div class="dropdown-divider"></div>
-                        <a href="#!" class="dropdown-item">
-                            <i class="ni ni-user-run"></i>
-                            <span>Logout</span>
-                        </a>
+                      <router-link to="/logout" class="dropdown-item">
+                        <i class="ni ni-user-run"></i>
+                        <span>Logout</span>
+                      </router-link>
                     </base-dropdown>
                 </ul>
             </slot>
@@ -134,6 +134,8 @@
       };
     },
     methods: {
+
+
       closeSidebar() {
         this.$sidebar.displaySidebar(false)
       },
@@ -145,6 +147,7 @@
       if (this.$sidebar.showSidebar) {
         this.$sidebar.showSidebar = false;
       }
-    }
+    },
+
   };
 </script>
