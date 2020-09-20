@@ -13,13 +13,15 @@ export const store = new Vuex.Store({
         stockList: [],
         token: localStorage.getItem('access_token') || null,
         positions: [],
-        email:'',
-
-
+        email: '',
+        combinedPositions: [],
     },
 
     getters: {
-        getPositions(state){
+        getCombinedPositions(state) {
+            return state.combinedPositions;
+        },
+        getPositions(state) {
             return state.positions;
         },
         loggedIn(state) {
@@ -29,20 +31,34 @@ export const store = new Vuex.Store({
     actions: {
         addPosition(context, position) {
             return new Promise((resolve, reject) => {
+
+
                 axios.post('/user/addPosition', position, {
                     headers: {
                         'Authorization': 'Bearer ' + this.state.token
                     }
                 })
+                    // eslint-disable-next-line
                     .then(response => {
-                        context.commit('addPosition', position)
-                        resolve(response);
+                        axios.get('/user/data', {
+                            headers: {
+                                'Authorization': 'Bearer ' + this.state.token
+                            }
+                        })
+                            .then(response => {
+                                const userData = response.data
+                                context.commit('setUserData', userData)
+                                resolve(response);
+                            }).catch(error => {
+                            reject(error);
+                        })
+
                     }).catch(error => {
                     reject(error);
                 })
             });
         },
-        getUserData(context){
+        getUserData(context) {
             return new Promise((resolve, reject) => {
                 axios.get('/user/data', {
                     headers: {
@@ -131,9 +147,10 @@ export const store = new Vuex.Store({
         destroyToken(state) {
             state.token = null;
         },
-        setUserData(state,userData){
+        setUserData(state, userData) {
             state.email = userData.username;
             state.positions = userData.positions;
+            state.combinedPositions = userData.combinedPositions;
         }
     }
 })

@@ -102,46 +102,7 @@
         </b-col>
 
         <b-col xl="4" class="mb-5 mb-xl-0">
-          <card header-classes="bg-transparent">
-            <b-row align-v="center" slot="header">
-              <b-col>
-                <h5 class="h3 mb-0">Add a Position</h5>
-              </b-col>
-            </b-row>
-
-            <validation-observer v-slot="{handleSubmit}" ref="formValidator">
-              <b-form role="form" @submit.prevent="handleSubmit(onSubmit)">
-                <base-input alternative
-                            class="mb-3"
-                            name="Stock"
-                            :rules="{required: true}"
-                            prepend-icon="ni ni-sound-wave"
-                            placeholder="Enter a stock eg: AMZN"
-                            v-model="model.stock">
-                </base-input>
-                <base-input alternative
-                            class="mb-3"
-                            name="Date"
-                            :rules="{required: true}"
-                            prepend-icon="ni ni-calendar-grid-58"
-                            type="date"
-                            v-model="model.date">
-                </base-input>
-                <base-input alternative
-                            class="mb-3"
-                            name="Quantity"
-                            :rules="{required: true}"
-                            prepend-icon="ni ni-archive-2"
-                            type="number"
-                            placeholder="Enter the amount of stock"
-                            v-model="model.quantity">
-                </base-input>
-                <div class="text-center">
-                  <base-button type="primary" native-type="submit" class="my-4">Add</base-button>
-                </div>
-              </b-form>
-            </validation-observer>
-          </card>
+          <add-position-form></add-position-form>
         </b-col>
       </b-row>
 
@@ -198,6 +159,9 @@ import SocialTrafficTable from './Dashboard/SocialTrafficTable';
 import PageVisitsTable from './Dashboard/PageVisitsTable';
 import PositionTable from "@/views/Dashboard/PositionTable";
 
+// Forms
+import AddPositionForm from "@/views/Dashboard/AddPositionForm";
+
 export default {
   components: {
     LineChart,
@@ -206,20 +170,20 @@ export default {
     StatsCard,
     PageVisitsTable,
     SocialTrafficTable,
-    PositionTable
+    PositionTable,
+    AddPositionForm
   },
   data() {
     return {
-
-      model: {
-        quantity: 0,
-        stock: '',
-        date: null,
-      },
       bigLineChart: {
         allData: [
-          [0, 20, 10, 30, 15, 40, 20, 60, 60],
-          [0, 20, 5, 25, 10, 30, 15, 40, 40]
+          [0, 20, 10, 30, 15, 40, 20, 60],
+          [0, 20, 5, 25, 10, 30, 15, 40]
+        ],
+        allLabels:[
+          ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'],
+            ['Mon' , 'Tue' , 'Wed' , 'Thu' , 'Fri']
+
         ],
         activeIndex: 0,
         chartData: {
@@ -233,54 +197,54 @@ export default {
         },
         extraOptions: chartConfigs.blueChartOptions,
       },
-      redBarChart: {
-        chartData: {
-          labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-          datasets: [{
-            label: 'Sales',
-            data: [25, 20, 30, 22, 17, 29]
-          }]
-        },
-        extraOptions: chartConfigs.blueChartOptions
-      }
+      // redBarChart: {
+      //   chartData: {
+      //     labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      //     datasets: [{
+      //       label: 'Sales',
+      //       data: [25, 20, 30, 22, 17, 29]
+      //     }]
+      //   },
+      //   extraOptions: chartConfigs.blueChartOptions
+      // }
     };
   },
   methods: {
     initBigChart(index) {
-      let chartData = {
+      this.bigLineChart.chartData = {
         datasets: [
           {
             label: 'Performance',
-            data: this.bigLineChart.allData[index]
+            data: this.getChartData[index].data
           }
         ],
-        labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        labels: this.getChartData[index].labels
       };
-      this.bigLineChart.chartData = chartData;
+
       this.bigLineChart.activeIndex = index;
     },
-    onSubmit() {
-      // this will be called only after form is valid. You can do api call here to login
-      // eslint-disable-next-line
-      console.log(this.model)
-      this.$store.dispatch('addPosition', {
-        stock: this.model.stock,
-        date: this.model.date,
-        quantity: this.model.quantity
-      })
-    }
+
   },
-  created() {
-    this.$store.dispatch('getStockList')
-        .then((response) => {
-          // eslint-disable-next-line
-          console.log(response)
-        });
-    this.$store.dispatch('getUserData')
-        .then((response) => {
-          // eslint-disable-next-line
-          console.log(this.$store.state.positions)
-        })
+  computed:{
+    getChartData(){
+      const list = this.$store.getters.getCombinedPositions;
+      const labels = [];
+      const data = [];
+      for(let i = 0; i < list.length;i++){
+        labels[i] = list[i].weekday;
+        data[i] = list[i].value;
+      }
+      const result = [];
+      result[1] = {
+        data: data.slice(0,7),
+        labels: labels.slice(0,7)
+      }
+      result[0] = {
+        data: data,
+        labels: labels
+      }
+      return result;
+    },
   },
   mounted() {
     this.initBigChart(0);
@@ -288,8 +252,8 @@ export default {
 };
 </script>
 <style>
-.el-table .cell {
-  padding-left: 0px;
-  padding-right: 0px;
-}
+/*.el-table .cell {*/
+/*  padding-left: 0;*/
+/*  padding-right: 0;*/
+/*}*/
 </style>
