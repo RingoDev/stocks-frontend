@@ -24,16 +24,8 @@
 
 ### Deploy
 
-* [ ] give Spring Boot access to Stock .csv files -> [stackoverflow](https://bit.ly/3jnzXAw)
-
 #### setup Linode Server Instance
 
-* 
- 
-  
-  
-  
-  
 * [x] Decide on the Specs for the instance
   * Spring Boot + Security + Docker = 200 - 300 RAM according to [stackoverflow](https://bit.ly/3cJy7ai)
   * MySql 500MB
@@ -41,6 +33,11 @@
   * [ ] Separate DB and App Instances
 
 
-
-* Install Jenkins
-* Configure CI pipeline: local Development -> Github -> Linode Instance
+* [ ] Install Docker
+* [ ] Install MySQL DockerImage
+* [ ] Install Spring-Boot DockerImage
+  * [ ] Set Memory constraints
+* [ ] give Spring Boot access to Stock .csv files -> [stackoverflow](https://bit.ly/3jnzXAw)
+* [ ] Populate MySQL Table
+* [ ] Install Jenkins
+* [ ] Configure CI pipeline: local Development -> Github -> Linode Instance
