@@ -35,7 +35,7 @@
         </el-table-column>
 
         <el-table-column label="buy value"
-                         min-width="90px"
+                         min-width="70em"
                          prop="buyValue">
         </el-table-column>
 
@@ -43,11 +43,12 @@
                          min-width="90px"
                          prop="currentValue">
         </el-table-column>
-        <el-table-column label="Percentage"
-                         min-width="90px"
+        <el-table-column label="Change in %"
+                         min-width="60px"
                          prop="percentage">
         </el-table-column>
-        <el-table-column>
+        <el-table-column label="Visible"
+                         min-width="60px">
           <template slot-scope="scope">
             <el-switch
                 @change="switchChecked(scope.row.id)"
@@ -85,14 +86,17 @@ export default {
     tableData: {
       get() {
         const pos = this.$store.getters.getLocalPositions
+        let result = []
 
         if (pos === undefined) return []
 
         for (let i = 0; i < pos.length; i++) {
-          pos[i].date = pos[i].date.toString().split('T')[0]
-              pos[i]['percentage'] = (Math.round((1 - (pos[i]['buyValue'] / pos[i]['currentValue'])) * 10000) / 100).toString() + '%';
+          result[i] = pos[i]
+          result[i].date = result[i].date.toString().split('T')[0]
+          result[i]['percentage'] = (Math.round((1 - (result[i].buyValue / result[i].currentValue)) * 10000) / 100).toString() + '%';
+          result[i].buyValue = Math.round(result[i]['buyValue']*100)/100
         }
-        return pos;
+        return result;
 
       },
       set(id) {

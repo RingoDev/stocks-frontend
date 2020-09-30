@@ -36,7 +36,7 @@
 
         <template slot="footer">
           <span :class="getSuccess(this.getPercentForWeek)">{{this.getPercentForWeek}}%</span>
-          <span class="text-nowrap">Since last week</span>
+          <span class="text-nowrap"></span>
         </template>
       </stats-card>
 
