@@ -43,12 +43,12 @@
 </template>
 
 <script>
-import { extend } from 'vee-validate';
-import {store} from '@/store';
+import {extend} from 'vee-validate';
+import {store} from '@/store'
 
 extend('stock-exists', {
   validate(stock) {
-    return store.state.stockList.includes(stock.toUpperCase());
+    return store.getters.getStockList.includes(stock.toUpperCase());
   },
   message: 'The stock doesn\'t exist'
 
@@ -56,7 +56,7 @@ extend('stock-exists', {
 
 export default {
   name: "add-position-form",
-  methods:{
+  methods: {
     onSubmit() {
       // this will be called only after form is valid. You can do api call here to login
       // eslint-disable-next-line
@@ -65,6 +65,12 @@ export default {
         stock: this.model.stock.toUpperCase(),
         date: this.model.date,
         quantity: this.model.quantity
+      }).catch(error => {
+        if (error.response.status === 403 && error.response.headers.expires === "1")
+            // eslint-disable-next-line
+          console.log("JWT EXPIRED");
+        this.$store.dispatch('logout')
+        this.$router.push({name: "auth"})
       })
     }
   },
@@ -84,13 +90,14 @@ export default {
         .then((response) => {
           // eslint-disable-next-line
           console.log(response)
-        });
-    this.$store.dispatch('getUserData')
-        // eslint-disable-next-line
-        .then((response) => {
+        }).catch(error => {
+      if (error.response.status === 403 && error.response.headers.expires === "1")
           // eslint-disable-next-line
-          console.log(this.$store.state.positions)
-        })
+        console.log("JWT EXPIRED");
+      this.$store.dispatch('logout')
+      this.$router.push({name: "auth"});
+    })
+
   },
 }
 </script>

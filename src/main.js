@@ -26,6 +26,10 @@ import router from './routes/router';
 // plugin setup
 Vue.use(DashboardPlugin);
 
+
+
+
+
 /* eslint-disable no-new */
 new Vue({
     el: '#app',

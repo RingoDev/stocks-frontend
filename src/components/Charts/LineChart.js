@@ -4,26 +4,21 @@ export default {
   name: 'line-chart',
   extends: Line,
   mixins: [mixins.reactiveProp, globalOptionsMixin],
-  props: {
-    extraOptions: {
-      type: Object,
-      default: () => ({})
-    }
-  },
+  props: ['extraOptions','chartData'],
   data() {
     return {
       ctx: null
     };
   },
-  mounted() {
-    this.$watch(
-      'chartData',
-      (newVal, oldVal) => {
-        if (!oldVal) {
-          this.renderChart(this.chartData, this.extraOptions);
-        }
-      },
-      { immediate: true }
-    );
-  }
+  watch:{
+    extraOptions: function(newVal,oldVal){
+      this.renderChart(this.chartData,newVal)
+    },
+    chartData:function (newVal,oldVal){
+      this.renderChart(newVal, this.extraOptions);
+    }
+  },
+  mounted(){
+    this.renderChart(this.chartData,this.extraOptions);
+  },
 };
