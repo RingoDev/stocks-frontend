@@ -4,8 +4,8 @@
       <slot name="label">
         <label v-if="label" :class="labelClasses">
           {{label}}
-        </label>
-      </slot>
+
+
       <div :class="[
        {'input-group': hasIcon},
        {'focused': focused},
@@ -21,15 +21,15 @@
         </span>
         </div>
         <slot v-bind="slotData">
-          <input
-            :value="value"
-            :type="type"
-            v-on="listeners"
-            v-bind="$attrs"
-            :valid="valid"
-            :required="required"
-            class="form-control"
-            :class="[{'is-valid': valid && validated && successMessage}, {'is-invalid': invalid && validated}, inputClasses]">
+            <input
+              :value="value"
+              :type="type"
+              v-on="listeners"
+              v-bind="$attrs"
+              :valid="valid"
+              :required="required"
+              class="form-control"
+              :class="[{'is-valid': valid && validated && successMessage}, {'is-invalid': invalid && validated}, inputClasses]">
         </slot>
         <div v-if="appendIcon || $slots.append" class="input-group-append">
           <span class="input-group-text">
@@ -49,6 +49,8 @@
         <div v-if="errors[0]" class="invalid-feedback" style="display: block;">
           {{ errors[0] }}
         </div>
+      </slot>
+      </label>
       </slot>
     </b-form-group>
   </validation-provider>

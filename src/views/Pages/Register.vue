@@ -24,7 +24,7 @@
     <b-container class="mt--8 pb-5">
       <!-- Table -->
       <b-row class="justify-content-center">
-        <b-col lg="6" md="8" >
+        <b-col lg="6" md="8">
           <b-card no-body class="bg-secondary border-0">
             <b-card-header class="bg-transparent pb-5">
               <div class="text-muted text-center mt-2 mb-4"><small>Sign up with</small></div>
@@ -51,7 +51,8 @@
                               placeholder="Name"
                               name="Name"
                               :rules="{required: true}"
-                              v-model="model.name">
+                              v-model="model.name"
+                              label="Enter Name">
                   </base-input>
 
                   <base-input alternative
@@ -60,7 +61,8 @@
                               placeholder="Email"
                               name="Email"
                               :rules="{required: true, email: true}"
-                              v-model="model.email">
+                              v-model="model.email"
+                              label="Enter Email">
                   </base-input>
 
                   <base-input alternative
@@ -70,10 +72,12 @@
                               type="password"
                               name="Password"
                               :rules="{required: true, min: 6}"
-                              v-model="model.password">
+                              v-model="model.password"
+                              label="Enter Password"
+                  label-classes="">
                   </base-input>
                   <div class="text-muted font-italic"><small>password strength: <span
-                    class="text-success font-weight-700">strong</span></small></div>
+                      class="text-success font-weight-700">strong</span></small></div>
                   <b-row class=" my-4">
                     <b-col cols="12">
                       <base-input :rules="{ required: { allowFalse: false } }" name=Privacy Policy>
@@ -97,24 +101,24 @@
 </template>
 <script>
 
-  export default {
-    name: 'register',
-    data() {
-      return {
-        model: {
-          name: '',
-          email: '',
-          password: '',
-          agree: false
-        }
-      }
-    },
-    methods: {
-      onSubmit() {
-        // this will be called only after form is valid. You can do an api call here to register users
+export default {
+  name: 'register',
+  data() {
+    return {
+      model: {
+        name: '',
+        email: '',
+        password: '',
+        agree: false
       }
     }
+  },
+  methods: {
+    onSubmit() {
+      // this will be called only after form is valid. You can do an api call here to register users
+    }
+  }
 
-  };
+};
 </script>
 <style></style>
