@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://localhost:8085/api/'
+if(process.env.NODE_ENV==="development")
+    axios.defaults.baseURL = 'http://localhost:8085/api/'
+else axios.defaults.baseURL = 'http://172.104.147.144:8085/api/'
 
 
 export const userDataStore = {
