@@ -43,15 +43,15 @@ export const stockStore = {
         removePosition(context, id) {
             // remove immediately to reload page faster
             const pos = context.getters.getLocalPositions
-            for (let i = 0; i<pos.length;i++){
-                if(pos[i].id === id){
-                    pos.splice(i,1);
+            for (let i = 0; i < pos.length; i++) {
+                if (pos[i].id === id) {
+                    pos.splice(i, 1);
                     break;
                 }
             }
-            context.commit("setLocalPositions",pos);
+            context.commit("setLocalPositions", pos);
             return new Promise((resolve, reject) => {
-                axios.post('/user/removePosition', {id:id}, {
+                axios.post('/user/removePosition', {id: id}, {
                     headers: {
                         'Authorization': 'Bearer ' + context.rootGetters.getToken
                     }
@@ -112,7 +112,6 @@ export const stockStore = {
             const positions = context.getters.getLocalPositions
             for (let i = 0; i < positions.length; i++) {
                 if (positions[i].id === id) {
-                    console.log('Toggled position with ID: ' + id + ' to ' + !positions[i].checked)
                     positions[i].checked = !positions[i].checked;
                     context.commit('setLocalPositions', positions);
                     return

@@ -79,6 +79,7 @@ export default {
     };
   },
   created() {
+
     this.$store.dispatch('getUserData')
         // eslint-disable-next-line
         .then((response) => {
