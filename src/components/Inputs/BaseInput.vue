@@ -4,7 +4,8 @@
       <slot name="label">
         <label v-if="label" :class="labelClasses">
           {{label}}
-
+        </label>
+      </slot>
 
       <div :class="[
        {'input-group': hasIcon},
@@ -50,8 +51,7 @@
           {{ errors[0] }}
         </div>
       </slot>
-      </label>
-      </slot>
+
     </b-form-group>
   </validation-provider>
 </template>

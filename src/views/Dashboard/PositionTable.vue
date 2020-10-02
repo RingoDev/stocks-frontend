@@ -1,6 +1,6 @@
 <template>
   <div>
-<!--    <div v-for="position in tableData" :key="position.id"><p>{{ position.id }}, {{ position.checked }}</p></div>-->
+    <!--    <div v-for="position in tableData" :key="position.id"><p>{{ position.id }}, {{ position.checked }}</p></div>-->
     <b-card body-class="p-0" header-class="border-0">
       <template v-slot:header>
         <b-row align-v="center">
@@ -19,41 +19,52 @@
           :data="tableData"
           header-row-class-name="thead-light">
         <el-table-column label="Stock"
-                         min-width="60px"
+                         min-width="40px"
                          prop="stock">
           <template v-slot="{row}">
             <div class="font-weight-600">{{ row.stock }}</div>
           </template>
         </el-table-column>
         <el-table-column label="Quantity"
-                         min-width="70px"
+                         min-width="50em"
                          prop="quantity">
         </el-table-column>
-        <el-table-column label="Buy Date"
-                         min-width="90px"
-                         prop="date">
-        </el-table-column>
+<!--        <el-table-column label="Buy Date"-->
+<!--                         min-width="90px"-->
+<!--                         prop="date">-->
+<!--        </el-table-column>-->
 
-        <el-table-column label="buy value"
-                         min-width="70em"
-                         prop="buyValue">
-        </el-table-column>
+<!--        <el-table-column label="buy value"-->
+<!--                         min-width="70em"-->
+<!--                         prop="buyValue">-->
+<!--        </el-table-column>-->
 
-        <el-table-column label="Current Value"
-                         min-width="90px"
-                         prop="currentValue">
-        </el-table-column>
-        <el-table-column label="Change in %"
-                         min-width="60px"
-                         prop="percentage">
-        </el-table-column>
+<!--        <el-table-column label="Current Value"-->
+<!--                         min-width="90px"-->
+<!--                         prop="currentValue">-->
+<!--        </el-table-column>-->
+<!--        <el-table-column label="Change in %"-->
+<!--                         min-width="60px"-->
+<!--                         prop="percentage">-->
+<!--        </el-table-column>-->
         <el-table-column label="Visible"
-                         min-width="60px">
+                         min-width="40px">
           <template slot-scope="scope">
             <el-switch
                 @change="switchChecked(scope.row.id)"
                 :value="scope.row.checked"
-                color="black"></el-switch>
+                color="black">
+
+            </el-switch>
+
+          </template>
+        </el-table-column>
+        <el-table-column label="Remove"
+                         min-width="60px">
+          <template slot-scope="scope">
+            <b-button variant="danger" v-on:click="removePosition(scope.row.id)">
+              Delete
+            </b-button>
           </template>
         </el-table-column>
       </el-table>
@@ -79,7 +90,10 @@ export default {
   methods: {
     switchChecked(id) {
       this.tableData = id;
-    }
+    },
+    removePosition(id){
+      this.$store.dispatch("removePosition",id)
+    },
   },
 
   computed: {
@@ -94,7 +108,7 @@ export default {
           result[i] = pos[i]
           result[i].date = result[i].date.toString().split('T')[0]
           result[i]['percentage'] = (Math.round((1 - (result[i].buyValue / result[i].currentValue)) * 10000) / 100).toString() + '%';
-          result[i].buyValue = Math.round(result[i]['buyValue']*100)/100
+          result[i].buyValue = Math.round(result[i]['buyValue'] * 100) / 100
         }
         return result;
 

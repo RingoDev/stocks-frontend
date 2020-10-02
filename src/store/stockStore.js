@@ -40,6 +40,42 @@ export const stockStore = {
                 })
             });
         },
+        removePosition(context, id) {
+            // remove immediately to reload page faster
+            const pos = context.getters.getLocalPositions
+            for (let i = 0; i<pos.length;i++){
+                if(pos[i].id === id){
+                    pos.splice(i,1);
+                    break;
+                }
+            }
+            context.commit("setLocalPositions",pos);
+            return new Promise((resolve, reject) => {
+                axios.post('/user/removePosition', {id:id}, {
+                    headers: {
+                        'Authorization': 'Bearer ' + context.rootGetters.getToken
+                    }
+                })
+                    // eslint-disable-next-line
+                    .then(response => {
+                        axios.get('/user/stock', {
+                            headers: {
+                                'Authorization': 'Bearer ' + context.rootGetters.getToken
+                            }
+                        })
+                            .then(response => {
+                                const stockData = response.data
+                                context.commit('setUserStockData', stockData)
+                                resolve(response);
+                            }).catch(error => {
+                            reject(error);
+                        })
+
+                    }).catch(error => {
+                    reject(error);
+                })
+            });
+        },
         getStockData(context) {
             return new Promise((resolve, reject) => {
                 axios.get('/user/stock', {

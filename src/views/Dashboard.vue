@@ -20,16 +20,17 @@
 <!--        <b-col xl="8" class="mb-5 mb-xl-0">-->
 <!--          <page-visits-table></page-visits-table>-->
 <!--        </b-col>-->
-        <b-col xl="6" class=" mb-5 mb-xl-0">
+        <b-col xl="12" class=" mb-5 mb-xl-0">
           <position-table></position-table>
         </b-col>
-        <b-col xl="6" class="mb-5 mb-xl-0">
-          <add-position-form></add-position-form>
-        </b-col>
+
 
 
       </b-row>
       <b-row class="mt-5">
+        <b-col xl="6" class="mb-5 mb-xl-0">
+          <add-position-form></add-position-form>
+        </b-col>
 
 <!--        <b-col xl="6" class="mb-5 mb-xl-0">-->
 <!--          <social-traffic-table></social-traffic-table>-->
