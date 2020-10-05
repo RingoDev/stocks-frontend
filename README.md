@@ -17,6 +17,8 @@ run nginx with
 
 ro = read-only
 
+
+
 ```
 docker run \
 --name=vue1 \
