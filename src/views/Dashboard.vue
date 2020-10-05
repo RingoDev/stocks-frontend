@@ -8,7 +8,7 @@
 
     <!--Charts-->
     <b-container fluid class="mt--7">
-      <b-row>
+      <b-row xl="3">
         <b-col xl="12" class="mb-5 mb-xl-0">
           <big-chart :loaded="dataLoaded"></big-chart>
         </b-col>
