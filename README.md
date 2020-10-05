@@ -16,5 +16,10 @@
 run nginx with 
 
 ```
-docker run --name=vue1 -v /etc/letsencrypt/live/www.ringodev.xyz /etc/nginx/ssl/ -p 80:80 -p 443:443
+docker run \
+--name=vue1 \
+-v /etc/letsencrypt/live/www.ringodev.xyz:/etc/nginx/ssl/ \
+-p 80:80 \
+-p 443:443 \
+-t ringodev/vue-stocks-frontend
 ```
