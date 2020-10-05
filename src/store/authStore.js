@@ -2,7 +2,7 @@ import axios from "axios";
 
 if(process.env.NODE_ENV==="development")
     axios.defaults.baseURL = 'http://localhost:8085/api/'
-else axios.defaults.baseURL = 'http://172.104.147.144:8085/api/'
+else axios.defaults.baseURL = 'https://www.ringodev.xyz:8080/api/'
 
 export const authStore = {
     state: {

@@ -21,7 +21,8 @@ ro = read-only
 
 ```
 docker run \
---name=vue1 \
+--name vue1 \
+--link spring1 \
 -d \
 -v /etc/letsencrypt/live/www.ringodev.xyz:/etc/nginx/ssl/live/www.ringodev.xyz:ro \
 -v /etc/letsencrypt/archive/www.ringodev.xyz:/etc/nginx/ssl/archive/www.ringodev.xyz:ro \
