@@ -15,10 +15,14 @@
 
 run nginx with 
 
+ro = read-only
+
 ```
 docker run \
 --name=vue1 \
--v /etc/letsencrypt/live/www.ringodev.xyz:/etc/nginx/ssl/ \
+-d \
+-v /etc/letsencrypt/live/www.ringodev.xyz:/etc/nginx/ssl/live/www.ringodev.xyz:ro \
+-v /etc/letsencrypt/archive/www.ringodev.xyz:/etc/nginx/ssl/archive/www.ringodev.xyz:ro \
 -p 80:80 \
 -p 443:443 \
 -t ringodev/vue-stocks-frontend
