@@ -48,7 +48,7 @@ export default {
     loaded: function(newVal){
       if(newVal) this.initBigChart(0);
     },
-    getChartData (newPos, oldPos){
+    getChartData (){
       if(this.loaded) this.initBigChart(this.bigLineChart.activeIndex);
     }
   },
@@ -98,8 +98,6 @@ export default {
       const pos = this.$store.getters.getLocalPositions;
       const dates = this.$store.getters.getValidDates;
 
-      console.log('Positions')
-      console.log(pos)
 
       const data = []
       for (let i = 0;i<dates.length;i++){

@@ -11,10 +11,10 @@ export default {
     };
   },
   watch:{
-    extraOptions: function(newVal,oldVal){
+    extraOptions: function(newVal){
       this.renderChart(this.chartData,newVal)
     },
-    chartData:function (newVal,oldVal){
+    chartData:function (newVal){
       this.renderChart(newVal, this.extraOptions);
     }
   },
