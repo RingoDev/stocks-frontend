@@ -102,9 +102,9 @@ const routes = [
                 name: 'register',
                 component: () => import(/* webpackChunkName: "demo" */ '../views/Pages/Register.vue')
             },
-            {path: '*', component: NotFound}
         ]
-    }
+    },
+    {path: '*', component: NotFound}
 ];
 
 export default routes;
