@@ -28,5 +28,6 @@ docker run \
 -v /etc/letsencrypt/archive/www.ringodev.xyz:/etc/nginx/ssl/archive/www.ringodev.xyz:ro \
 -p 80:80 \
 -p 443:443 \
+-p 8443:8443 \
 -t ringodev/vue-stocks-frontend
 ```
