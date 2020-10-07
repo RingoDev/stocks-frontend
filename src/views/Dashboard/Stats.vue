@@ -1,6 +1,6 @@
 <template>
   <b-row>
-    <b-col xl="3" md="6">
+    <b-col xl="4" md="12">
       <stats-card title="Total Value"
                   type="gradient-red"
                   :sub-title="getTotal"
@@ -13,7 +13,7 @@
         </template>
       </stats-card>
     </b-col>
-    <b-col xl="3" md="6">
+    <b-col xl="4" md="12">
       <stats-card title="Since Last Month"
                   type="gradient-orange"
                   :sub-title="this.getMonthTotal"
@@ -27,7 +27,7 @@
         </template>
       </stats-card>
     </b-col>
-    <b-col xl="3" md="6">
+    <b-col xl="4" md="12">
       <stats-card title="Since Last Week"
                   type="gradient-green"
                   :sub-title="this.getWeekTotal"

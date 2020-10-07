@@ -8,15 +8,17 @@
 
     <validation-observer v-slot="{handleSubmit}" ref="formValidator">
       <b-form role="form" @submit.prevent="handleSubmit(onSubmit)">
-        <base-input alternative
-                    class="mb-3"
-                    name="Stock"
-                    :required="true"
-                    rules="stock-exists"
-                    prepend-icon="ni ni-sound-wave"
-                    placeholder="Enter a stock eg: AMZN"
-                    v-model="model.stock">
-        </base-input>
+        <datalist-input
+            :item-list="getStockList"
+            alternative
+            class="mb-3"
+            name="Stock"
+            :required="true"
+            rules="stock-exists"
+            prepend-icon="ni ni-sound-wave"
+            placeholder="Enter a stock eg: AMZN"
+            v-model="model.stock"
+        ></datalist-input>
         <base-input alternative
                     class="mb-3"
                     name="Date"
@@ -34,6 +36,7 @@
                     placeholder="Enter the amount of stock"
                     v-model="model.quantity">
         </base-input>
+
         <div class="text-center">
           <base-button type="primary" native-type="submit" class="my-4">Add</base-button>
         </div>
@@ -44,7 +47,9 @@
 
 <script>
 import {extend} from 'vee-validate';
-import {store} from '@/store'
+import {store} from "@/store";
+
+import DatalistInput from "@/views/Dashboard/DatalistInput";
 
 extend('stock-exists', {
   validate(stock) {
@@ -56,6 +61,14 @@ extend('stock-exists', {
 
 export default {
   name: "add-position-form",
+  components: {
+    DatalistInput,
+  },
+  computed: {
+    getStockList() {
+      return this.$store.getters.getStockList
+    }
+  },
   methods: {
     onSubmit() {
       // this will be called only after form is valid. You can do api call here to login

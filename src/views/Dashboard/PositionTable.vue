@@ -15,18 +15,17 @@
 
 
       <el-table
+          emptyText="Add a Position"
           class="table-responsive table"
           :data="tableData"
           header-row-class-name="thead-light">
         <el-table-column label="Stock"
-                         min-width="40px"
                          prop="stock">
           <template v-slot="{row}">
             <div class="font-weight-600">{{ row.stock }}</div>
           </template>
         </el-table-column>
         <el-table-column label="Quantity"
-                         min-width="50em"
                          prop="quantity">
         </el-table-column>
 <!--        <el-table-column label="Buy Date"-->
@@ -48,7 +47,7 @@
 <!--                         prop="percentage">-->
 <!--        </el-table-column>-->
         <el-table-column label="Visible"
-                         min-width="40px">
+                         >
           <template slot-scope="scope">
             <el-switch
                 @change="switchChecked(scope.row.id)"
@@ -59,8 +58,7 @@
 
           </template>
         </el-table-column>
-        <el-table-column label="Remove"
-                         min-width="60px">
+        <el-table-column label="Remove">
           <template slot-scope="scope">
             <b-button variant="danger" v-on:click="removePosition(scope.row.id)">
               Delete
