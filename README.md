@@ -29,5 +29,6 @@ docker run \
 -p 80:80 \
 -p 443:443 \
 -p 8443:8443 \
+--label=com.centurylinklabs.watchtower.enable=true \
 -t ringodev/vue-stocks-frontend
 ```
