@@ -66,7 +66,7 @@
                     <div class="row">
                         <div class="col-6 collapse-brand">
                             <router-link to="/">
-                                <img :src="logo">
+                                <img :src="logo" alt="RingoStocks Logo">
                             </router-link>
                         </div>
                         <div class="col-6 collapse-close">

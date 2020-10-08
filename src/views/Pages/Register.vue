@@ -7,8 +7,7 @@
           <b-row class="justify-content-center">
             <b-col xl="5" lg="6" md="8" class="px-5">
               <h1 class="text-white">Create an account</h1>
-              <p class="text-lead text-white">Use these awesome forms to login or create new account in your project for
-                free.</p>
+              <p class="text-lead text-white">You can also use a Guest Account to try our Platform</p>
             </b-col>
           </b-row>
         </div>
@@ -26,22 +25,9 @@
       <b-row class="justify-content-center">
         <b-col lg="6" md="8">
           <b-card no-body class="bg-secondary border-0">
-            <b-card-header class="bg-transparent pb-5">
-              <div class="text-muted text-center mt-2 mb-4"><small>Sign up with</small></div>
-              <div class="text-center">
-                <a href="#" class="btn btn-neutral btn-icon mr-4">
-                  <span class="btn-inner--icon"><img src="img/icons/common/github.svg"></span>
-                  <span class="btn-inner--text">Github</span>
-                </a>
-                <a href="#" class="btn btn-neutral btn-icon">
-                  <span class="btn-inner--icon"><img src="img/icons/common/google.svg"></span>
-                  <span class="btn-inner--text">Google</span>
-                </a>
-              </div>
-            </b-card-header>
             <b-card-body class="px-lg-5 py-lg-5">
               <div class="text-center text-muted mb-4">
-                <small>Or sign up with credentials</small>
+                <small>Sign up with credentials</small>
               </div>
               <validation-observer v-slot="{handleSubmit}" ref="formValidator">
                 <b-form role="form" @submit.prevent="handleSubmit(onSubmit)">
@@ -74,11 +60,11 @@
                               :rules="{required: true, min: 6}"
                               v-model="model.password"
                               label="Enter Password"
-                  label-classes="">
+                              label-classes="">
                   </base-input>
                   <div class="text-muted font-italic"><small>password strength: <span
                       class="text-success font-weight-700">strong</span></small></div>
-                  <b-row class=" my-4">
+                  <b-row class=" my-3">
                     <b-col cols="12">
                       <base-input :rules="{ required: { allowFalse: false } }" name=Privacy Policy>
                         <b-form-checkbox v-model="model.agree">
@@ -88,9 +74,14 @@
                     </b-col>
                   </b-row>
                   <div class="text-center">
-                    <b-button type="submit" variant="primary" class="mt-4">Create account</b-button>
+                    <b-button type="submit" variant="primary" class="my-3">Create account</b-button>
                   </div>
                 </b-form>
+                <div class="text-center">
+                    <div class="text-center">
+                      <b-button v-on:click="createGuestAccount" variant="primary" class="mt-3">Use Guest Account</b-button>
+                    </div>
+                </div>
               </validation-observer>
             </b-card-body>
           </b-card>
@@ -114,6 +105,9 @@ export default {
     }
   },
   methods: {
+    createGuestAccount(){
+     // Todo send api request to create guest account and receive Token -> login with token
+    },
     onSubmit() {
       // this will be called only after form is valid. You can do an api call here to register users
     }
