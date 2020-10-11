@@ -17,3 +17,5 @@ EXPOSE 80
 EXPOSE 443
 # Backend
 EXPOSE 8443
+# Web Push Service
+EXPOSE 444
