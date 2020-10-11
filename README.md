@@ -23,11 +23,13 @@ ro = read-only
 docker run \
 --name vue1 \
 --link spring1 \
+--link push1 \
 -d \
 -v /etc/letsencrypt/live/www.ringodev.xyz:/etc/nginx/ssl/live/www.ringodev.xyz:ro \
 -v /etc/letsencrypt/archive/www.ringodev.xyz:/etc/nginx/ssl/archive/www.ringodev.xyz:ro \
 -p 80:80 \
 -p 443:443 \
+-p 444:444 \
 -p 8443:8443 \
 --label=com.centurylinklabs.watchtower.enable=true \
 -t ringodev/vue-stocks-frontend

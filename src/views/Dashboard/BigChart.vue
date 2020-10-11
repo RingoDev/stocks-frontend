@@ -43,13 +43,13 @@ import LineChart from '@/components/Charts/LineChart';
 
 export default {
   name: "big-chart",
-  props:['loaded'],
-  watch:{
-    loaded: function(newVal){
-      if(newVal) this.initBigChart(0);
+  props: ['loaded'],
+  watch: {
+    loaded: function (newVal) {
+      if (newVal) this.initBigChart(0);
     },
-    getChartData (){
-      if(this.loaded) this.initBigChart(this.bigLineChart.activeIndex);
+    getChartData() {
+      if (this.loaded) this.initBigChart(this.bigLineChart.activeIndex);
     }
   },
   components: {
@@ -84,53 +84,87 @@ export default {
         labels: this.getChartData[index].labels
       };
 
+
       this.bigLineChart.activeIndex = index;
 
-      const options = chartConfigs.blueChartOptions
-      options.scales.yAxes[0].ticks.min = this.getChartData[index].min;
-      options.scales.yAxes[0].ticks.max = this.getChartData[index].max;
-      this.bigLineChart.extraOptions = options;
+      this.bigLineChart.extraOptions = this.getChartData[index].options;
     },
+    formatToolTipLabel(label){
+      const result = label.split('T')
+      return result[0]
+    },
+    getLabels(dates){
+      const labels = []
+      for (let i = 0; i < dates.length; i++) {
+        labels[i] = dates[i].shortWeekday;
+      }
+      return labels
+    },
+    getData(dates,pos){
+      const data = []
+      for (let i = 0; i < dates.length; i++) {
+        data[dates.length - (1 + i)] = 0;
+        for (let j = 0; j < pos.length; j++) {
+          if (pos[j].checked) data[dates.length - (1 + i)] += pos[j].history.values[i];
+        }
+      }
+      return data;
+    },
+    roundDataPoints(data){
+      for (let i = 0; i < data.length; i++) {
+        data[i] = Math.round(data[i] * 100) / 100;
+      }
+      return data;
+    }
   },
+
+
 
   computed: {
     getChartData() {
       const pos = this.$store.getters.getLocalPositions;
-      const dates = this.$store.getters.getValidDates;
+      const dates = this.$store.getters.getValidDates.slice().reverse();
 
+      console.log('Positions',pos)
+      console.log('Dates',dates)
 
-      const data = []
-      for (let i = 0;i<dates.length;i++){
-        data[dates.length-(1+i)]= 0;
-        for (let j = 0;j<pos.length;j++){
-          if(pos[j].checked) data[dates.length-(1+i)] += pos[j].history.values[i];
-        }
-      }
-
-
-      const labels = []
-      for(let i = 0;i<data.length;i++){
-        labels[i] = dates[i]["shortWeekday"];
-        data[i] = Math.round(data[i]*100)/100;
-      }
-
+      const weekDates = dates.slice(dates.length-5,dates.length)
+      const dateList = [dates,weekDates]
       const result = [];
 
-      result[0] = {
-        data: data,
-        labels: labels,
-        min:Math.min(...data)-5,
-        max:Math.max(...data)+5,
-      }
 
-      const weekData = data.slice(data.length - 5, data.length)
-      const weekLabels = labels.slice(data.length - 5, data.length )
+      for(let x = 0; x <2;x++){
+        const data = this.roundDataPoints(this.getData(dateList[x],pos));
+        const labels = this.getLabels(dateList[x]);
 
-      result[1] = {
-        data: weekData,
-        labels: weekLabels,
-        min: Math.min(...weekData)-5,
-        max: Math.max(...weekData)+5,
+        result[x] = {
+          data: data,
+          labels: labels,
+        }
+
+        // define options
+
+        const options = JSON.parse(JSON.stringify(chartConfigs.blueChartOptions))
+        options.tooltips.callbacks.label = (tooltipItem, data) => {
+          return tooltipItem.yLabel.toString() + ' $'
+        }
+        options.tooltips.callbacks.title = (tooltipItem,data) => {
+          let str = dateList[x][tooltipItem[0].index].fullWeekday + ' '
+          str += this.formatToolTipLabel(dateList[x][tooltipItem[0].index].date)
+          return str
+        }
+        options.tooltips.custom = (tooltip) => {
+            if (!tooltip) return;
+            // disable displaying the color box;
+            tooltip.displayColors = false;
+        }
+        options.tooltips.callbacks.beforeLabel = () => {
+          return ' '
+        }
+        options.scales.yAxes[0].ticks.min = Math.min(...data) - 5;
+        options.scales.yAxes[0].ticks.max = Math.max(...data) + 5;
+        result[x].options = options;
+
       }
 
       // eslint-disable-next-line

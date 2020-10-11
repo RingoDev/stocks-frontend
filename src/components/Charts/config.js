@@ -174,7 +174,10 @@ export const basicOptions = {
 export let blueChartOptions = {
     tooltips:{
         beginAtZero: false,
+        callbacks:{
+        },
     },
+
     scales: {
         yAxes: [{
             gridLines: {

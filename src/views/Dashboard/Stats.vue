@@ -8,7 +8,7 @@
                   class="mb-4">
 
         <template slot="footer">
-          <span :class="getSuccess(this.getPercentSinceBuyIn)">{{this.getPercentSinceBuyIn}}%</span>
+          <span :class="getSuccess(this.getPercentSinceBuyIn)">{{ this.getPercentSinceBuyIn }}%</span>
           <span class="text-nowrap">From Buy Value</span>
         </template>
       </stats-card>
@@ -35,43 +35,48 @@
                   class="mb-4">
 
         <template slot="footer">
-          <span :class="getSuccess(this.getPercentForWeek)">{{this.getPercentForWeek}}%</span>
+          <span :class="getSuccess(this.getPercentForWeek)">{{ this.getPercentForWeek }}%</span>
           <span class="text-nowrap"></span>
         </template>
       </stats-card>
 
     </b-col>
-<!--    <b-col xl="3" md="6">-->
-<!--      <stats-card title="Performance"-->
-<!--                  type="gradient-info"-->
-<!--                  sub-title="49,65%"-->
-<!--                  icon="ni ni-chart-bar-32"-->
-<!--                  class="mb-4">-->
+    <!--    <b-col xl="3" md="6">-->
+    <!--      <stats-card title="Performance"-->
+    <!--                  type="gradient-info"-->
+    <!--                  sub-title="49,65%"-->
+    <!--                  icon="ni ni-chart-bar-32"-->
+    <!--                  class="mb-4">-->
 
-<!--        <template slot="footer">-->
-<!--          <span class="text-success mr-2">54.8%</span>-->
-<!--          <span class="text-nowrap">Since last month</span>-->
-<!--        </template>-->
-<!--      </stats-card>-->
-<!--    </b-col>-->
+    <!--        <template slot="footer">-->
+    <!--          <span class="text-success mr-2">54.8%</span>-->
+    <!--          <span class="text-nowrap">Since last month</span>-->
+    <!--        </template>-->
+    <!--      </stats-card>-->
+    <!--    </b-col>-->
   </b-row>
 </template>
 
 <script>
 export default {
   name: "stats",
-  methods:{
+  methods: {
     getSuccess(value) {
       let str = ''
       if (value >= 0) str = "success"
       else str = "danger"
       return "text-" + str + " mr-2"
 
-    }
+    },
+    roundNumber(number) {
+      return Math.round(number * 100) / 100;
+
+    },
 
   },
   computed: {
-    getPercentSinceBuyIn(){
+
+    getPercentSinceBuyIn() {
       const pos = this.$store.getters.getLocalPositions;
 
       let sum = 0;
@@ -82,10 +87,10 @@ export default {
           oldSum += pos[i].buyValue;
         }
       }
-      if(sum === 0 || oldSum === 0) return 0.00
+      if (sum === 0 || oldSum === 0) return 0.00
       return Math.round(((sum - oldSum) / oldSum) * 10000) / 100
     },
-    getMonthTotal(){
+    getMonthTotal() {
       const pos = this.$store.getters.getLocalPositions;
 
       let sum = 0;
@@ -108,10 +113,11 @@ export default {
         if (pos[i].checked) sum += pos[i].currentValue;
       }
 
-      sum = sum.toString() + " $"
+
+      sum = this.roundNumber(sum).toString() + " $"
       return sum
     },
-    getWeekTotal(){
+    getWeekTotal() {
       const pos = this.$store.getters.getLocalPositions
       let sum = 0;
       let oldSum = 0;
@@ -133,10 +139,10 @@ export default {
           oldSum += pos[i].history.values[pos[i].history.values.length - 1];
         }
       }
-      if(sum === 0 || oldSum === 0) return 0.00
+      if (sum === 0 || oldSum === 0) return 0.00
       return Math.round(((sum - oldSum) / oldSum) * 10000) / 100
     },
-    getPercentForWeek(){
+    getPercentForWeek() {
       const pos = this.$store.getters.getLocalPositions
       let sum = 0;
       let oldSum = 0;
@@ -146,7 +152,7 @@ export default {
           oldSum += pos[i].history.values[5];
         }
       }
-      if(sum === 0 || oldSum === 0) return 0.00
+      if (sum === 0 || oldSum === 0) return 0.00
       return Math.round(((sum - oldSum) / oldSum) * 10000) / 100
     },
   },
