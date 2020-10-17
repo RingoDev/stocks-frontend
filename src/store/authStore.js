@@ -1,17 +1,17 @@
 import axios from "axios";
 
-if(process.env.NODE_ENV==="development")
-    axios.defaults.baseURL = 'http://localhost:8080/api/'
+if (process.env.NODE_ENV === "development")
+    axios.defaults.baseURL = 'http://localhost:8085/api/'
 else axios.defaults.baseURL = 'https://www.ringodev.xyz:8443/api/'
 
 export const authStore = {
     state: {
         stockList: [],
-            token: localStorage.getItem('access_token') || null,
+        token: localStorage.getItem('access_token') || null,
     },
 
     getters: {
-        getToken(state){
+        getToken(state) {
             return state.token
         },
         loggedIn(state) {
@@ -19,6 +19,12 @@ export const authStore = {
         }
     },
     actions: {
+        register(context, credentials) {
+            const url = '/signup?username=' + credentials.email + '&password=' + credentials.password
+            return new Promise((resolve, reject) => {
+                axios.get(url).then(r => resolve(r)).catch(e => reject(e));
+            });
+        },
         login(context, credentials) {
             const url = '/authenticate?username=' + credentials.email + '&password=' + credentials.password
             return new Promise((resolve, reject) => {

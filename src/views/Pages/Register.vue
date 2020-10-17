@@ -109,7 +109,13 @@ export default {
      // Todo send api request to create guest account and receive Token -> login with token
     },
     onSubmit() {
-      // this will be called only after form is valid. You can do an api call here to register users
+      this.$store.dispatch('register', {
+        email: this.model.email,
+        password: this.model.password
+      }).then(() => {
+        // this.$router.push({path: '/dashboard'})
+        // route to verify page
+      })
     }
   }
 
