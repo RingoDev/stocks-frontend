@@ -130,7 +130,7 @@ export default {
   border-top: 12px solid #5e72e4;
   border-right: 12px solid transparent;
   box-sizing: border-box;
-  animation: rotation 1s linear infinite;
+  animation: rotation 1.5s linear infinite;
 }
 
 .loader::after {
