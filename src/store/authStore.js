@@ -1,7 +1,7 @@
 import axios from "axios";
 
 if (process.env.NODE_ENV === "development")
-    axios.defaults.baseURL = 'http://localhost:8085/api/'
+    axios.defaults.baseURL = 'http://localhost:8080/api/'
 else axios.defaults.baseURL = 'https://www.ringodev.xyz:8443/api/'
 
 export const authStore = {
@@ -20,15 +20,15 @@ export const authStore = {
     },
     actions: {
         register(context, credentials) {
-            const url = '/signup?username=' + credentials.email + '&password=' + credentials.password
+            const url = '/signup';
             return new Promise((resolve, reject) => {
-                axios.get(url).then(r => resolve(r)).catch(e => reject(e));
+                axios.post(url,credentials).then(r => resolve(r)).catch(e => reject(e));
             });
         },
         login(context, credentials) {
-            const url = '/authenticate?username=' + credentials.email + '&password=' + credentials.password
+            const url = '/authenticate'
             return new Promise((resolve, reject) => {
-                axios.get(url)
+                axios.post(url,credentials)
                     .then(response => {
                         const token = response.data
                         // eslint-disable-next-line

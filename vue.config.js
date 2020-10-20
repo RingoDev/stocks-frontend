@@ -5,6 +5,9 @@ function resolveSrc(_path) {
 }
 // vue.config.js
 module.exports = {
+  devServer: {
+    port: 3456
+  },
   lintOnSave: true,
   configureWebpack: {
     // Set up all the aliases we use in our app.

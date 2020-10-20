@@ -97,7 +97,7 @@ export default {
   data() {
     return {
       model: {
-        name: '',
+        username: '',
         email: '',
         password: '',
         agree: false
@@ -111,6 +111,7 @@ export default {
     onSubmit() {
       this.$store.dispatch('register', {
         email: this.model.email,
+        username: this.model.username,
         password: this.model.password
       }).then(() => {
         // this.$router.push({path: '/dashboard'})
