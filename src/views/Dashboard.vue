@@ -4,7 +4,7 @@
 
       <base-header class="pb-6 pb-8 pt-5 pt-md-8 bg-gradient-success">
         <!-- Card stats -->
-        <stats v-if="dataLoaded"></stats>
+        <stats></stats>
       </base-header>
 
       <!--Charts-->

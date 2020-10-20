@@ -173,7 +173,7 @@ export default {
     },
   },
   mounted() {
-
+    if(this.loaded) this.initBigChart(0);
   }
 }
 </script>
