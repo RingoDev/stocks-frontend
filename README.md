@@ -1,5 +1,7 @@
 # Stocks-WebApp
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/8bcee3ac-367d-4141-8960-f2b9274b0a0e/deploy-status)](https://app.netlify.com/sites/ringodev-stocks/deploys)
+
 ## Frontend
 
 * Give a more specific top and bottom chart margin dependent on stock area not hardcoded -5 and 5
