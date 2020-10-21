@@ -2,7 +2,7 @@
   <div>
     <div v-if="userDataLoaded && stockDataLoaded">
 
-      <base-header class="pb-6 pb-8 pt-5 pt-md-8 bg-gradient-success">
+      <base-header class="pb-6 pb-8 pt-0 bg-gradient-success">
         <!-- Card stats -->
         <stats></stats>
       </base-header>
@@ -41,8 +41,8 @@
         <!--End tables-->
       </b-container>
     </div>
-    <div style="align-content: center; text-align: center" class="mt-5">
-      <div v-if="!userDataLoaded || !stockDataLoaded" class="loader"></div>
+    <div v-else style="align-content: center; text-align: center" class="mt-5">
+      <div class="loader"></div>
     </div>
   </div>
 </template>

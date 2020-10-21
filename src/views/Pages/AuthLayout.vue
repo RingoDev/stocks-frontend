@@ -9,26 +9,11 @@
     >
         <div slot="brand" class="navbar-wrapper">
           <b-navbar-brand to="/">
-            <img src="img/brand/white.png" alt="logo">
+            <img src="/img/stocks_512px.png" alt="logo">
           </b-navbar-brand>
         </div>
 
         <template>
-          <!--       <div class="navbar-collapse-header">-->
-          <!--         <b-row>-->
-          <!--           <b-col cols="6" class="collapse-brand">-->
-          <!--             <router-link to="/">-->
-          <!--               <img src="img/brand/green.png">-->
-          <!--             </router-link>-->
-          <!--           </b-col>-->
-          <!--           <b-col cols="6" class="collapse-close">-->
-          <!--             <button type="button" class="navbar-toggler" @click="showMenu = false">-->
-          <!--               <span></span>-->
-          <!--               <span></span>-->
-          <!--             </button>-->
-          <!--           </b-col>-->
-          <!--         </b-row>-->
-          <!--       </div>-->
           <b-navbar-nav class="ml-auto">
             <b-nav-item to="/register">
               <i class="ni ni-circle-08"></i>
@@ -59,13 +44,6 @@
               © {{ year }} <a href="https://ringodev.com" class="font-weight-bold ml-1" target="_blank">RingoDev</a>
             </div>
           </b-col>
-          <!--          <b-col xl="6" class="col-xl-6">-->
-          <!--            <b-nav  class="nav-footer justify-content-center justify-content-xl-end">-->
-          <!--              <b-nav-item href="https://ringodev.com" target="_blank" >-->
-          <!--                RingoDev-->
-          <!--              </b-nav-item>-->
-          <!--            </b-nav>-->
-          <!--          </b-col>-->
         </b-row>
       </b-container>
     </footer>

@@ -9,7 +9,7 @@ import GlobalComponents from './globalComponents';
 // A plugin file where you could register global directives
 import GlobalDirectives from './globalDirectives';
 // Sidebar on the right. Used as a local plugin in DashboardLayout.vue
-import SideBar from '@/components/SidebarPlugin';
+// import SideBar from '@/components/SidebarPlugin';
 
 // element ui language configuration
 import lang from 'element-ui/lib/locale/lang/en';
@@ -36,7 +36,7 @@ export default {
   install(Vue) {
     Vue.use(GlobalComponents);
     Vue.use(GlobalDirectives);
-    Vue.use(SideBar);
+    // Vue.use(SideBar);
     Vue.use(Notifications);
     Vue.use(BootstrapVue);
     Vue.use(IconsPlugin);

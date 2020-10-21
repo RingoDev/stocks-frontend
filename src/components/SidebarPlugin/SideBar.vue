@@ -7,7 +7,7 @@
                 
             </navbar-toggle-button>
             <router-link class="navbar-brand" to="/">
-                <img :src="logo" class="navbar-brand-img" alt="...">
+                <img src="/img/stocks_512px.png" class="navbar-brand-img" alt="...">
             </router-link>
 
             <slot name="mobile-right">

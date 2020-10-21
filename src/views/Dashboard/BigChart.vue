@@ -172,7 +172,7 @@ export default {
       return result;
     },
   },
-  mounted() {
+  mounted() {loca
     if(this.loaded) this.initBigChart(0);
   }
 }
