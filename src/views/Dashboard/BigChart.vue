@@ -90,7 +90,8 @@ export default {
       this.bigLineChart.extraOptions = this.getChartData[index].options;
     },
     formatToolTipLabel(label){
-      const result = label.split('T')
+      const date = new Date(label).toISOString()
+      const result = date.split('T')
       return result[0]
     },
     getLabels(dates){
