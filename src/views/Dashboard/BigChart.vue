@@ -145,10 +145,10 @@ export default {
         // define options
 
         const options = JSON.parse(JSON.stringify(chartConfigs.blueChartOptions))
-        options.tooltips.callbacks.label = (tooltipItem, data) => {
+        options.tooltips.callbacks.label = (tooltipItem) => {
           return tooltipItem.yLabel.toString() + ' $'
         }
-        options.tooltips.callbacks.title = (tooltipItem,data) => {
+        options.tooltips.callbacks.title = (tooltipItem) => {
           let str = dateList[x][tooltipItem[0].index].fullWeekday + ' '
           str += this.formatToolTipLabel(dateList[x][tooltipItem[0].index].date)
           return str
