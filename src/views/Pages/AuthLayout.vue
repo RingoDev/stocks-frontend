@@ -41,7 +41,7 @@
         <b-row align-v="center" class="justify-content-xl-between">
           <b-col xl="6">
             <div class="copyright text-center text-xl-left text-muted">
-              © {{ year }} <a href="https://ringodev.com" class="font-weight-bold ml-1" target="_blank">RingoDev</a>
+              © {{ year }} <a rel="noopener" href="https://ringodev.com" class="font-weight-bold ml-1" target="_blank">RingoDev</a>
             </div>
           </b-col>
         </b-row>

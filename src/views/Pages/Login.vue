@@ -31,7 +31,10 @@
               </div>
               <validation-observer v-slot="{handleSubmit}" ref="formValidator">
                 <b-form role="form" @submit.prevent="handleSubmit(onSubmit)">
+                  <label for="Email Login">Login with Email</label>
+                  <label for="Password Login">Login with Password</label>
                   <base-input alternative
+                              id="Email Login"
                               class="mb-3"
                               name="Email"
                               :rules="{required: true, email: true}"
@@ -42,6 +45,7 @@
                   </base-input>
 
                   <base-input alternative
+                              id="Password Login"
                               class="mb-3"
                               name="Password"
                               :rules="{required: true, min: 6}"
