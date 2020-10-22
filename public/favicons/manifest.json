@@ -39,5 +39,7 @@
   }
  ],
  "start_url": "/",
- "display": "standalone"
+ "display": "standalone",
+ "short_name": "Stocks",
+ "full_name": "RingoDev_Stocks"
 }
