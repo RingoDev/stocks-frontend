@@ -305,36 +305,36 @@ self.addEventListener(
     );
   }
 );
-// is called when the User clicks on the Notification
-self.addEventListener('notificationclick', function(e) {
-  var notification = e.notification;
-  var primaryKey = notification.data.primaryKey;
-  var action = e.action;
-
-  if (action === 'close') {
-    notification.close();
-  } else {
-    clients.openWindow('https://www.ringodev.com/');
-    notification.close();
-  }
-});
-self.addEventListener('push', function(e) {
-  if(e.data) console.log('Data of push event',e.data.text());
-  var options = {
-    body: e.data ? JSON.parse(e.data.text()).data : '',
-    icon: 'img/logo_1024px.png',
-    data: {
-      dateOfArrival: Date.now(),
-      primaryKey: '2'
-    },
-    actions: [
-      {action: 'explore', title: 'Check it out',
-        icon: 'img/stocks.png'},
-      {action: 'close', title: 'Close',
-        icon: 'img/blackjack.png'},
-    ]
-  };
-  e.waitUntil(
-    self.registration.showNotification('RingoDev received an update!', options)
-  );
-});
+// // is called when the User clicks on the Notification
+// self.addEventListener('notificationclick', function(e) {
+//   var notification = e.notification;
+//   var primaryKey = notification.data.primaryKey;
+//   var action = e.action;
+//
+//   if (action === 'close') {
+//     notification.close();
+//   } else {
+//     clients.openWindow('https://www.ringodev.com/');
+//     notification.close();
+//   }
+// });
+// self.addEventListener('push', function(e) {
+//   if(e.data) console.log('Data of push event',e.data.text());
+//   var options = {
+//     body: e.data ? JSON.parse(e.data.text()).data : '',
+//     icon: 'img/logo_1024px.png',
+//     data: {
+//       dateOfArrival: Date.now(),
+//       primaryKey: '2'
+//     },
+//     actions: [
+//       {action: 'explore', title: 'Check it out',
+//         icon: 'img/stocks.png'},
+//       {action: 'close', title: 'Close',
+//         icon: 'img/blackjack.png'},
+//     ]
+//   };
+//   e.waitUntil(
+//     self.registration.showNotification('RingoDev received an update!', options)
+//   );
+// });
