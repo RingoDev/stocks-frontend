@@ -37,7 +37,7 @@
   </card>
 </template>
 
-<script>
+<script >
 import * as chartConfigs from "@/components/Charts/config";
 import LineChart from '@/components/Charts/LineChart';
 
@@ -68,7 +68,7 @@ export default {
           ],
           labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         },
-        extraOptions: chartConfigs.blueChartOptions,
+        extraOptions: chartConfigs["blueChartOptions"],
       },
     };
   },
@@ -89,11 +89,19 @@ export default {
 
       this.bigLineChart.extraOptions = this.getChartData[index].options;
     },
+    /**
+     * @param label {number}
+     * @returns {string}
+     */
     formatToolTipLabel(label){
       const date = new Date(label).toISOString()
       const result = date.split('T')
       return result[0]
     },
+    /**
+     * @param dates {[]}
+     * @returns {[]}
+     */
     getLabels(dates){
       const labels = []
       for (let i = 0; i < dates.length; i++) {
@@ -122,20 +130,20 @@ export default {
 
 
   computed: {
-    getChartData() {
+    getChartData: function () {
       const pos = this.$store.getters.getLocalPositions;
       const dates = this.$store.getters.getValidDates.slice().reverse();
 
-      console.log('Positions',pos)
-      console.log('Dates',dates)
+      console.log('Positions', pos)
+      console.log('Dates', dates)
 
-      const weekDates = dates.slice(dates.length-5,dates.length)
-      const dateList = [dates,weekDates]
+      const weekDates = dates.slice(dates.length - 5, dates.length)
+      const dateList = [dates, weekDates]
       const result = [];
 
 
-      for(let x = 0; x <2;x++){
-        const data = this.roundDataPoints(this.getData(dateList[x],pos));
+      for (let x = 0; x < 2; x++) {
+        const data = this.roundDataPoints(this.getData(dateList[x], pos));
         const labels = this.getLabels(dateList[x]);
 
         result[x] = {
@@ -145,7 +153,7 @@ export default {
 
         // define options
 
-        const options = JSON.parse(JSON.stringify(chartConfigs.blueChartOptions))
+        const options = JSON.parse(JSON.stringify(chartConfigs["blueChartOptions"]))
         options.tooltips.callbacks.label = (tooltipItem) => {
           return tooltipItem.yLabel.toString() + ' $'
         }
@@ -155,9 +163,9 @@ export default {
           return str
         }
         options.tooltips.custom = (tooltip) => {
-            if (!tooltip) return;
-            // disable displaying the color box;
-            tooltip.displayColors = false;
+          if (!tooltip) return;
+          // disable displaying the color box;
+          tooltip.displayColors = false;
         }
         options.tooltips.callbacks.beforeLabel = () => {
           return ' '
